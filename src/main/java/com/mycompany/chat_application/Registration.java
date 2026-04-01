@@ -32,17 +32,19 @@ public class Registration {
         String registerStatus = registerUser(storedUsername, storedPassword);
         System.out.println(registerStatus);
         System.out.println();
-        System.out.println("***REGISTRATION SUCCESFUL***");
-        System.out.println("***YOU MAY LOGIN***");
-        System.out.println();
-        
-        System.out.print("Enter your username: ");
-        String username = scanner.nextLine();
-        
-        System.out.print("Enter your password: ");
-        String password = scanner.nextLine();
-        
+       
         if(registerStatus.equals("SUCCESFULLY REGISTERED")){
+            
+            System.out.println("***REGISTRATION SUCCESFUL***");
+            System.out.println("***YOU MAY LOGIN***");
+            System.out.println();
+        
+            System.out.print("Enter your username: ");
+            String username = scanner.nextLine();
+        
+            System.out.print("Enter your password: ");
+            String password = scanner.nextLine();
+            
             System.out.println(returnLoginStatus(username, storedUsername, password, storedPassword));
         }
         
