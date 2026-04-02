@@ -75,7 +75,7 @@ public class Registration {
     
     public String returnLoginStatus(String username, String storedUsername, String password, String storedPassword){
         
-        if(loginUser(username, storedUsername, storedPassword, password)){
+        if(loginUser(username, storedUsername, password, storedPassword)){
         return "Welcome " + username + " it is great to see you again.";
         }
         else{
