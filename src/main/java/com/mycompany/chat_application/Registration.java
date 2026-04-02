@@ -19,7 +19,7 @@ public class Registration {
             System.out.println("Username succesfully captured");
         }
         else{
-            System.out.println("Username is not correctly formated");
+            System.out.println("Username is not correctly formated please try again");
             return;
         }
         System.out.println("Enter password (MUST be atleast 8 characters, contain atleast one number, one Capital letter and one special character: ");
@@ -28,7 +28,7 @@ public class Registration {
             System.out.println("Password succesfully captured");
         }
         else{
-            System.out.println("Password is not correctly formated");
+            System.out.println("Password is not correctly formated please try again");
             return;
         }
 
