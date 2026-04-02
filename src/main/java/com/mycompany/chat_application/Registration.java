@@ -15,7 +15,13 @@ public class Registration {
             
         System.out.println("Enter username (MUST CONTAIN an underscore and be 5 characters or less");
         String storedUsername = scanner.nextLine();
-
+        if (checkUsername(storedUsername)){
+            System.out.println("Username succesfully captured");
+        }
+        else{
+            System.out.println("Username is not correctly formated");
+            return;
+        }
         System.out.println("Enter password (MUST be atleast 8 characters, contain atleast one number, one Capital letter and one special character: ");
         String storedPassword = scanner.nextLine();
 
