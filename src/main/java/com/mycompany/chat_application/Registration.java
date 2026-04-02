@@ -24,6 +24,13 @@ public class Registration {
         }
         System.out.println("Enter password (MUST be atleast 8 characters, contain atleast one number, one Capital letter and one special character: ");
         String storedPassword = scanner.nextLine();
+        if (checkPassword(storedPassword)){
+            System.out.println("Password succesfully captured");
+        }
+        else{
+            System.out.println("Password is not correctly formated");
+            return;
+        }
 
         System.out.println("Enter your cellphone number(MUST contain national code(+27) and be ten digits(9 excluding the code)");
         String storedCellphoneNum= scanner.nextLine();
