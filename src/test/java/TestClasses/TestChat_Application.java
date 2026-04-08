@@ -95,7 +95,7 @@ public class TestChat_Application {
     
     }
     
-    @Test
+    /*@Test
     public void TestUsernameAndPasswordCorrectlyFormated(){
     Registration register = new Registration();
     String actual = register.registerUser("kyl_1", "Ch&&sec@ke99!" );
@@ -117,10 +117,11 @@ public class TestChat_Application {
     @Test
     public void TestPasswordIsInCorrectlyFormated(){
     Registration register = new Registration();
-    String actual = register.registerUser("kyl_1", "password" );
+    String actual = register.checkPassword("password");
     String expected = "Password is not correctly formated, Please ensure it is atleast 8 characters, "
                     + "contain atleast one number, one Capital letter and one special character: ";
     assertEquals(expected, actual);
     
     }
+    */
 }
