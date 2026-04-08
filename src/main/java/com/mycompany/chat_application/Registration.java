@@ -15,18 +15,18 @@ public class Registration {
             
         System.out.println("Enter username (MUST CONTAIN an underscore and be 5 characters or less");
         String storedUsername = scanner.nextLine();
-        checkUsername(storedUsername);
+        boolean rightUsername = checkUsername(storedUsername);
 
         System.out.println("Enter password (MUST be atleast 8 characters, contain atleast one number, one Capital letter and one special character: ");
         String storedPassword = scanner.nextLine();
-        checkPassword(storedPassword);
+        boolean rightPassword = checkPassword(storedPassword);
 
         System.out.println("Enter your cellphone number(MUST contain national code(+27) and be ten digits(9 excluding the code)");
         String storedCellphoneNum= scanner.nextLine();
         checkCellphoneNum(storedCellphoneNum);
 
 
-        String registerStatus = registerUser(storedUsername, storedPassword);
+        String registerStatus = registerUser(rightUsername, rightPassword);
         System.out.println(registerStatus);
         System.out.println();
        
@@ -47,14 +47,14 @@ public class Registration {
         scanner.close();
     }
     
-    public String registerUser(String username, String password){
-        if(checkUsername(username) && checkPassword(password)){
+    public String registerUser(boolean rightUsername, boolean rightPassword){
+        if(rightUsername && rightPassword){
             return "SUCCESFULLY REGISTERED";
         }
-        else if(!checkUsername(username) && checkPassword(password)){
+        else if(!rightUsername && rightPassword){
             return "REGISTRATION FAILD  Username is not correctly formated please ensure it contains an underscore and is no more than five characters in lenght";
         }
-        else if(checkUsername(username) && !checkPassword(password)){
+        else if(rightUsername && !rightPassword){
             return "REGISTRATION FAILD  Password is not correctly formated, Please ensure it is atleast 8 characters, "
                     + "contain atleast one number, one Capital letter and one special character: ";
         }
