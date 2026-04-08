@@ -15,33 +15,17 @@ public class Registration {
             
         System.out.println("Enter username (MUST CONTAIN an underscore and be 5 characters or less");
         String storedUsername = scanner.nextLine();
-        if (checkUsername(storedUsername)){
-            System.out.println("Username succesfully captured");
-        }
-        else{
-            System.out.println("Username is not correctly formated please try again");
-            return;
-        }
+        checkUsername(storedUsername);
+
         System.out.println("Enter password (MUST be atleast 8 characters, contain atleast one number, one Capital letter and one special character: ");
         String storedPassword = scanner.nextLine();
-        if (checkPassword(storedPassword)){
-            System.out.println("Password succesfully captured");
-        }
-        else{
-            System.out.println("Password is not correctly formated please try again");
-            return;
-        }
+        checkPassword(storedPassword);
 
         System.out.println("Enter your cellphone number(MUST contain national code(+27) and be ten digits(9 excluding the code)");
         String storedCellphoneNum= scanner.nextLine();
-        if (checkCellphoneNum(storedCellphoneNum)){
-            System.out.println("Cellphone succesfully captured");
-        }
-        else{
-            System.out.println("Cellphone number incorrectly formated or does not contain international code");
-            return;
-        }
-        
+        checkCellphoneNum(storedCellphoneNum);
+
+
         String registerStatus = registerUser(storedUsername, storedPassword);
         System.out.println(registerStatus);
         System.out.println();
@@ -68,14 +52,14 @@ public class Registration {
             return "SUCCESFULLY REGISTERED";
         }
         else if(!checkUsername(username) && checkPassword(password)){
-            return "Username is not correctly formated please ensure it contains an underscore and is no more than five characters in lenght";
+            return "REGISTRATION FAILD  Username is not correctly formated please ensure it contains an underscore and is no more than five characters in lenght";
         }
         else if(checkUsername(username) && !checkPassword(password)){
-            return "Password is not correctly formated, Please ensure it is atleast 8 characters, "
+            return "REGISTRATION FAILD  Password is not correctly formated, Please ensure it is atleast 8 characters, "
                     + "contain atleast one number, one Capital letter and one special character: ";
         }
         else{
-            return "Both username and password are incorrect REGISTRATION FAILD";
+            return "REGISTRATION FAILD  Both username and password are incorrect ";
         }
     }
 
@@ -98,18 +82,41 @@ public class Registration {
     }
     
     public boolean checkUsername(String username){
-        return username.contains("_") && username.length() <=5;
+        if (username.contains("_") && username.length() <= 5){
+            System.out.println("Username succesfully captured");
+            return true;
+        }
+        else{
+            System.out.println("Username is not correctly formated please ensure it contains an underscore and is no more than five characters in lenght");
+            return false;
+        }
     }
     
     public boolean checkPassword(String password){
-        return password.length() >=8 &&
+        if(password.length() >=8 &&
                password.matches(".*[0-9].*") &&
                password.matches(".*[A-Z].*") &&
-               password.matches(".*[!@#$%&?/*^~`].*");
+               password.matches(".*[!@#$%&?/*^~`].*")){
+            
+            System.out.println("Password succesfully captured");
+            return true;
+        }
+        else{
+            System.out.println("Password is not correctly formated, Please ensure it is atleast 8 characters, "
+                    + "contain atleast one number, one Capital letter and one special character: ");
+            return false;
+        }
     }
     
     public boolean checkCellphoneNum(String cellPhoneNumber){
-        return cellPhoneNumber.matches("^\\+27\\d{9}$");
+        if(cellPhoneNumber.matches("^\\+27\\d{9}$")){
+            System.out.println("Cellphone number succesfully captured");
+            return true;
+        }
+        else{
+            System.out.println("Cellphone number incorrectly formated or does not contain international code");
+            return false;
+        }
     }
 }
 
