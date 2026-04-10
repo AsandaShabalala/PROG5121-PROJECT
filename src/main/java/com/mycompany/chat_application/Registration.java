@@ -23,8 +23,11 @@ public class Registration {
 
         System.out.println("Enter your cellphone number(MUST contain national code(+27) and be ten digits(9 excluding the code)");
         String storedCellphoneNum= scanner.nextLine();
-        checkCellphoneNum(storedCellphoneNum);
-
+        //checkCellphoneNum(storedCellphoneNum);
+        if(!checkCellphoneNum(storedCellphoneNum)){
+            System.out.println("REGISTRATION FAILED");
+            return;
+        }
 
         String registerStatus = registerUser(rightUsername, rightPassword);
         System.out.println(registerStatus);
