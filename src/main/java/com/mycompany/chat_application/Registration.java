@@ -10,7 +10,7 @@ import java.util.Scanner;
  */
 public class Registration {
     Scanner scanner = new Scanner(System.in);
-        
+             
     void register(){
             
         System.out.println("Enter username (MUST CONTAIN an underscore and be 5 characters or less");
@@ -39,13 +39,19 @@ public class Registration {
             System.out.println("***YOU MAY LOGIN***");
             System.out.println();
         
+            System.out.print("Enter your first name: ");
+            String firstName = scanner.nextLine();
+            
+            System.out.print("Enter your last name: ");
+            String lastName = scanner.nextLine();
+            
             System.out.print("Enter your username: ");
             String username = scanner.nextLine();
         
             System.out.print("Enter your password: ");
             String password = scanner.nextLine();
             
-            System.out.println(returnLoginStatus(username, storedUsername, password, storedPassword));
+            System.out.println(returnLoginStatus(firstName, lastName , username, storedUsername, password, storedPassword));
         }
         scanner.close();
     }
@@ -73,10 +79,10 @@ public class Registration {
         
     }
     
-    public String returnLoginStatus(String username, String storedUsername, String password, String storedPassword){
+    public String returnLoginStatus(String firstName, String lastName, String username, String storedUsername, String password, String storedPassword){
         
         if(loginUser(username, storedUsername, password, storedPassword)){
-        return "Welcome " + username + " it is great to see you again.";
+        return "LOGIN SUCCESSFULL Welcome " + firstName +","+ lastName+ " it is great to see you again.";
         }
         else{
              return "Password or username incorrect please try again.";
