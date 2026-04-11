@@ -9,22 +9,23 @@ import java.util.Scanner;
  * @author Student
  */
 public class Registration {
-    Scanner scanner = new Scanner(System.in);
+    
              
     void register(){
-            
+        Scanner scanner = new Scanner(System.in);
+        
         System.out.println("Enter username (MUST CONTAIN an underscore and be 5 characters or less");
         String storedUsername = scanner.nextLine();
         boolean rightUsername = checkUsername(storedUsername);
 
         System.out.println("Enter password (MUST be atleast 8 characters, contain atleast one number, one Capital letter and one special character: ");
         String storedPassword = scanner.nextLine();
-        boolean rightPassword = checkPassword(storedPassword);
+        boolean rightPassword = checkPasswordComplexity(storedPassword);
 
         System.out.println("Enter your cellphone number(MUST contain national code(+27) and be ten digits(9 excluding the code)");
         String storedCellphoneNum= scanner.nextLine();
         //checkCellphoneNum(storedCellphoneNum);
-        if(!checkCellphoneNum(storedCellphoneNum)){
+        if(!checkCellphoneNumber(storedCellphoneNum)){
             System.out.println("REGISTRATION FAILED");
             return;
         }
@@ -101,7 +102,7 @@ public class Registration {
         }
     }
     
-    public boolean checkPassword(String password){
+    public boolean checkPasswordComplexity(String password){
         if(password.length() >=8 &&
                password.matches(".*[0-9].*") &&
                password.matches(".*[A-Z].*") &&
@@ -117,7 +118,7 @@ public class Registration {
         }
     }
     
-    public boolean checkCellphoneNum(String cellPhoneNumber){
+    public boolean checkCellphoneNumber(String cellPhoneNumber){
         if(cellPhoneNumber.matches("^\\+27\\d{9}$")){
             System.out.println("Cellphone number succesfully captured");
             return true;

@@ -19,70 +19,56 @@ public class TestChat_Application {
     public void TestUsernameCorrectlyFormated() {
     Registration register = new Registration();
   
-    boolean actual = register.checkUsername("kyl_1");
-    boolean expected = true;
-    assertEquals(expected, actual);
+    assertTrue(register.checkUsername("kyl_1"));
     }
     
     @Test
     public void TestUsernameInCorrectlyFormated() {
     Registration register = new Registration();
     
-    boolean actual = register.checkUsername("kyle!!!!!!");
-    boolean expected = false;
-    assertEquals(expected, actual);
+    assertFalse(register.checkUsername("kyle!!!!!!"));
     }
 
     @Test
     public void TestLoginSuccesfull(){
         Registration register = new Registration();
-        boolean actual = register.loginUser("kyl_1", "kyl_1", "ASDasd!@#123", "ASDasd!@#123");
-        boolean expected = true;
-        assertEquals(expected, actual);
+
+        assertTrue(register.loginUser("kyl_1", "kyl_1", "ASDasd!@#123", "ASDasd!@#123"));
     }
     
     @Test
     public void TestLoginFailed(){
         Registration register = new Registration();
-        boolean actual = register.loginUser("kyl_", "kyl_1", "ASDasd!@#12", "ASDasd!@#123");
-        boolean expected = false;
-        assertEquals(expected, actual);
+ 
+        assertFalse(register.loginUser("kyl_", "kyl_1", "ASDasd!@#12", "ASDasd!@#123"));
     }
     
     @Test
     public void TestpasswordMeetsRequirements() {
     Registration register = new Registration();
   
-    boolean actual = register.checkPassword("Ch&&sec@ke99!");
-    boolean expected = true;
-    assertEquals(expected, actual);
+    assertTrue(register.checkPasswordComplexity("Ch&&sec@ke99!"));
     }
     
     @Test
     public void TestpasswordDoesNotMeetsRequirements() {
     Registration register = new Registration();
   
-    boolean actual = register.checkPassword("password");
-    boolean expected = false;
-    assertEquals(expected, actual);
+    assertFalse(register.checkPasswordComplexity("password"));
     }
     
     @Test
     public void TestCellphoneCorrectlyFormated() {
     Registration register = new Registration();
   
-    boolean actual = register.checkCellphoneNum("+27838968976");
-    boolean expected = true;
-    assertEquals(expected, actual);
+    assertTrue(register.checkCellphoneNumber("+27838968976"));
     }
     
     @Test
     public void TestCellphoneInCorrectlyFormated() {
     Registration register = new Registration();
   
-    boolean actual = register.checkCellphoneNum("08966553");
-    boolean expected = false;
-    assertEquals(expected, actual);
+    assertFalse(register.checkCellphoneNumber("08966553"));
     }
     
     @Test
@@ -94,6 +80,8 @@ public class TestChat_Application {
     assertEquals(expected, actual);
     
     }
+    
+    //problem is my 
     
     /*@Test
     public void TestUsernameAndPasswordCorrectlyFormated(){
