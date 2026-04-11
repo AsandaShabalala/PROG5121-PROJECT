@@ -9,10 +9,11 @@ import java.util.Scanner;
  * @author Student
  */
 public class Registration {
-    Scanner scanner = new Scanner(System.in);
+    
              
     void register(){
-            
+        Scanner scanner = new Scanner(System.in);
+        
         System.out.println("Enter username (MUST CONTAIN an underscore and be 5 characters or less");
         String storedUsername = scanner.nextLine();
         boolean rightUsername = checkUsername(storedUsername);
