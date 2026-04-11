@@ -54,7 +54,6 @@ public class Registration {
             
             System.out.println(returnLoginStatus(firstName, lastName , username, storedUsername, password, storedPassword));
         }
-        scanner.close();
     }
     
     public String registerUser(boolean rightUsername, boolean rightPassword){
