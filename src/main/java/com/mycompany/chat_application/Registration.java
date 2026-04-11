@@ -10,7 +10,9 @@ import java.util.Scanner;
  */
 public class Registration {
     
-             
+         
+    //this void register method handles the registration process also the login proccess 
+    //also this is where we also get the user input and print out relevent info
     void register(){
         Scanner scanner = new Scanner(System.in);
         
@@ -24,16 +26,18 @@ public class Registration {
 
         System.out.println("Enter your cellphone number(MUST contain national code(+27) and be ten digits(9 excluding the code)");
         String storedCellphoneNum= scanner.nextLine();
-        //checkCellphoneNum(storedCellphoneNum);
+        
         if(!checkCellphoneNumber(storedCellphoneNum)){
             System.out.println("REGISTRATION FAILED");
             return;
         }
-
+        
         String registerStatus = registerUser(rightUsername, rightPassword);
         System.out.println(registerStatus);
         System.out.println();
        
+        
+        //If statement so the user can only login if they registered successfully
         if(registerStatus.equals("SUCCESFULLY REGISTERED")){
             
             System.out.println("***REGISTRATION SUCCESFUL***");
@@ -55,7 +59,8 @@ public class Registration {
             System.out.println(returnLoginStatus(firstName, lastName , username, storedUsername, password, storedPassword));
         }
     }
-    
+    //this method returns the correct output based on if the user was able to register or not
+    //also lets the user know why they fail to register
     public String registerUser(boolean rightUsername, boolean rightPassword){
         if(rightUsername && rightPassword){
             return "SUCCESFULLY REGISTERED";
@@ -72,6 +77,7 @@ public class Registration {
         }
     }
 
+    //checks if the username and password maatch the ones that were used when registering 
     public boolean loginUser(String username, String storedUsername, String password, String storedPassword){
         
         return storedUsername.equals(username)  
@@ -79,6 +85,8 @@ public class Registration {
         
     }
     
+    // returns the logi status of the user letting them know if the were successful or not
+    //it takes in alot of aarguments because some are for the loginUser that is called inside it 
     public String returnLoginStatus(String firstName, String lastName, String username, String storedUsername, String password, String storedPassword){
         
         if(loginUser(username, storedUsername, password, storedPassword)){
@@ -90,6 +98,7 @@ public class Registration {
         
     }
     
+    //checks if the username contains an underscore and is 5 characters or less
     public boolean checkUsername(String username){
         if (username.contains("_") && username.length() <= 5){
             System.out.println("Username succesfully captured");
@@ -101,6 +110,7 @@ public class Registration {
         }
     }
     
+    //checks the password complexity( checks lenght, contains a number, a capital letter and a special charecter)
     public boolean checkPasswordComplexity(String password){
         if(password.length() >=8 &&
                password.matches(".*[0-9].*") &&
@@ -117,6 +127,7 @@ public class Registration {
         }
     }
     
+    //checks if the cellphone contains the south african international code and has strictly 9 other numbers
     public boolean checkCellphoneNumber(String cellPhoneNumber){
         if(cellPhoneNumber.matches("^\\+27\\d{9}$")){
             System.out.println("Cellphone number succesfully captured");
