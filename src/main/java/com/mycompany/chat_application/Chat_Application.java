@@ -15,7 +15,7 @@ public class Chat_Application {
         Registration reg = new Registration();
         Message message = new Message();
 
-       // message.sendMesseges();
+        message.Messaging();
         //reg.register();
     }
 }

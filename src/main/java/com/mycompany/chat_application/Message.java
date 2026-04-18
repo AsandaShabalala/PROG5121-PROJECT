@@ -15,18 +15,19 @@ public class Message {
     void Messaging(){
         int Option;
         
-        
-        System.out.println("***Welcoome to QuickChat***\nOption1 : Send Messages"
-                                + " \nOption2: Show recently sent messages  "
-                                + "\nOption3: Quit");
+    do{
+        System.out.println("""
+                           ***Welcoome to QuickChat***
+                           Choose an Option (1-3)
+                           Option1 : Send Messages 
+                           Option2: Show recently sent messages  
+                           Option3: Quit""");
         Option = scanner.nextInt();
         scanner.nextLine();
         
         switch(Option){
             
-            case 1: 
-                
-                
+            case 1: sendMesseges();
                 break;
             case 2: System.out.println("COMING SOON: Still under development ");
                 break;
@@ -35,7 +36,7 @@ public class Message {
             default: System.out.println("Please enter a valid option from 1 - 3");
         }
             
-        
+    }while(Option != 3);    
     
 }
     public void sendMesseges(){
@@ -48,15 +49,18 @@ public class Message {
             int numberOfMessages;
             System.out.println("How many messages would you like to send");
             numberOfMessages = scanner.nextInt();
+            scanner.nextLine();
             
             int messageCounter = 1;
             while(messageCounter <= numberOfMessages){
                 
-                System.out.println("Enter message number "+ messageCounter + " you want to send (Must be less than 250 characters)");
+                System.out.println();
+                System.out.println("Enter message number "+ messageCounter + " (Must be less than 250 characters)");
                 String message = scanner.nextLine();
                 
-                sentMessage(messageCounter, message, recipientCellNumber);
+                String result = sentMessage(messageCounter, message, recipientCellNumber);
                 
+                System.out.println(result);
                 messageCounter++;
             }
             int tota_messages = totalMessages(totalMessages);
@@ -76,7 +80,9 @@ public class Message {
                             Option 1 : Send Message 
                             Option 2 : Store Message  
                             Option 3 : Disregard Message""");
+        
         String option = scanner.nextLine();
+        System.out.println();
         
         if(option.equals("1")){
             
@@ -89,8 +95,10 @@ public class Message {
                     "\nRecipient : "+ recipientCellNumber + 
                     "\nMessage : " + message);
             
+            System.out.println();
             totalMessages++;
             return "Message Sent Successfully";
+            
         }
         
      
