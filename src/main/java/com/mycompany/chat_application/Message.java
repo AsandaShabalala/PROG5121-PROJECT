@@ -39,19 +39,19 @@ public class Message {
     public void sendMesseges(){
         System.out.println("Enter the cellphone you want to send the message to");
         String recipientCellNumber = scanner.nextLine();
+        boolean rightCellNumber = checkRecipientCellphoneNum(recipientCellNumber);
         
-        if(checkRecipientCellphoneNum(recipientCellNumber)){
+        if(rightCellNumber){
             
             int numberOfMessages;
-            
             System.out.println("How many messages would you like to send");
             numberOfMessages = scanner.nextInt();
+            scanner.nextLine();
             for(int i = 1; i <= numberOfMessages; i++){
-                System.out.println("Enter the message you want to send (Must be less than 250 characters)");
+                System.out.println("Enter message number "+ i + " you want to send (Must be less than 250 characters)");
                 String message = scanner.nextLine();
                 
-                long messageId = createMessageId();
-                createMessageHash(messageId, i, message);
+                
                 
         }
             
@@ -62,6 +62,30 @@ public class Message {
         }
     }
     
+    public String sentMessage(long id, int numOfMessage, String message, String recipientCellNumber){
+        
+        System.out.println("""
+                           Choose what to do with the massege reply with a number (1-3)
+                            Option 1 : Send Message 
+                            Option 2 : Store Message  
+                            Option 3 : Disregard Message""");
+        String option = scanner.nextLine();
+        
+        if(option.equals("1")){
+            
+            long messageId = createMessageId();
+            String messageHash = createMessageHash(messageId, numOfMessage, message);
+            
+            System.out.println("Message ID : "+ messageId + 
+                    "\nMessageHash : "+ messageHash +
+                    "\nRecipient : "+ recipientCellNumber + 
+                    "\nMessage : " + message);
+        }
+        
+     
+            
+       return null;     
+    }
     public String createMessageHash(long id, int numOfMessage, String message){
         
        String ID = Long.toString(id);
@@ -71,7 +95,7 @@ public class Message {
        String firstWord = message.substring(0, firstSpace).toUpperCase();
        
        int lastSpace = message.lastIndexOf(" ");
-       String lastWord = message.substring(lastSpace + 2).toUpperCase();
+       String lastWord = message.substring(lastSpace + 1).toUpperCase();
        
        return firstTwoNUm + ":" + numOfMessage + firstWord + lastWord;
     }
