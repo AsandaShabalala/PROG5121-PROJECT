@@ -10,9 +10,11 @@ import java.util.Scanner;
  */
 public class Message {
     Scanner scanner = new Scanner(System.in);
+    int totalMessages = 0;
     
     void Messaging(){
         int Option;
+        
         
         System.out.println("***Welcoome to QuickChat***\nOption1 : Send Messages"
                                 + " \nOption2: Show recently sent messages  "
@@ -46,14 +48,19 @@ public class Message {
             int numberOfMessages;
             System.out.println("How many messages would you like to send");
             numberOfMessages = scanner.nextInt();
-            scanner.nextLine();
-            for(int i = 1; i <= numberOfMessages; i++){
-                System.out.println("Enter message number "+ i + " you want to send (Must be less than 250 characters)");
+            
+            int messageCounter = 1;
+            while(messageCounter <= numberOfMessages){
+                
+                System.out.println("Enter message number "+ messageCounter + " you want to send (Must be less than 250 characters)");
                 String message = scanner.nextLine();
                 
+                sentMessage(messageCounter, message, recipientCellNumber);
                 
-                
-        }
+                messageCounter++;
+            }
+            int tota_messages = totalMessages(totalMessages);
+            System.out.println("The total number of messages sent is : " + tota_messages);
             
             
         }
@@ -62,7 +69,7 @@ public class Message {
         }
     }
     
-    public String sentMessage(long id, int numOfMessage, String message, String recipientCellNumber){
+    public String sentMessage(int numOfMessage, String message, String recipientCellNumber){
         
         System.out.println("""
                            Choose what to do with the massege reply with a number (1-3)
@@ -73,6 +80,7 @@ public class Message {
         
         if(option.equals("1")){
             
+            
             long messageId = createMessageId();
             String messageHash = createMessageHash(messageId, numOfMessage, message);
             
@@ -80,11 +88,19 @@ public class Message {
                     "\nMessageHash : "+ messageHash +
                     "\nRecipient : "+ recipientCellNumber + 
                     "\nMessage : " + message);
+            
+            totalMessages++;
+            return "Message Sent Successfully";
         }
         
      
             
        return null;     
+    }
+    
+    public int totalMessages(int numberOfMessages){
+        
+        return numberOfMessages;
     }
     public String createMessageHash(long id, int numOfMessage, String message){
         
