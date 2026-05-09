@@ -3,6 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.chat_application;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 /**
  *
@@ -106,7 +110,32 @@ public class Message {
        return null;     
     }
     
-    public int totalMessages(int numberOfMessages){
+    public void storeMessage(String message, long id, String hash, String recipientCell) throws IOException{
+        
+        String path = "message.json";
+        File file = new File(path);
+        
+        String newInfo = "{\n"+
+                            "\"Message\"  : \"" +message+"\",\n" + 
+                            "\"recipient\": \"" +recipientCell +"\",\n" +
+                            "\"messageID\": \""+id+"\",\n" +
+                            "\"messaheHash\": " +hash+"\",\n" +
+                            "}";
+        if(!file.exists()){
+            //file write will create the file to the path
+            FileWriter writefile = new FileWriter(path);
+            //Printwriter will let me write info on the file with writer.print
+            PrintWriter writer = new PrintWriter(writefile);
+            
+            //the format of json files is that they must start with [ and end with ]
+            writer.println("[");
+            writer.println(newInfo);
+            writer.println("]");
+            
+        }
+    }
+    
+    public int totalMessages(int numberOfMessages) {
         
         return numberOfMessages;
     }
