@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.chat_application;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -121,9 +123,12 @@ public class Message {
                             "\"messageID\": \""+id+"\",\n" +
                             "\"messaheHash\": " +hash+"\",\n" +
                             "}";
+        
+        //using the file object to check if the file exist
         if(!file.exists()){
-            //file write will create the file to the path
+            //file writer will create the file to the path if the file doesnot exist
             FileWriter writefile = new FileWriter(path);
+            
             //Printwriter will let me write info on the file with writer.print
             PrintWriter writer = new PrintWriter(writefile);
             
@@ -131,6 +136,11 @@ public class Message {
             writer.println("[");
             writer.println(newInfo);
             writer.println("]");
+            
+        }
+        else{
+            FileReader readfile = new FileReader(path);
+            BufferedReader reader = new BufferedReader(readfile);
             
         }
     }
