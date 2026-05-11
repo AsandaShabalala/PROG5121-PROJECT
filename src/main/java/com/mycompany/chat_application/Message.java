@@ -131,7 +131,7 @@ public class Message {
                             "\"Message\"  : \"" +message+"\",\n" + 
                             "\"recipient\": \"" +recipientCell +"\",\n" +
                             "\"messageID\": \""+id+"\",\n" +
-                            "\"messaheHash\": " +hash+"\",\n" +
+                            "\"messaheHash\": \"" +hash+"\"\n" +
                             "}";
         
         //using the file object to check if the file exist
@@ -162,8 +162,12 @@ public class Message {
                 storedFile = storedFile + line + "\n";
             }
             reader.close();
-            storedFile = storedFile.substring(0, storedFile.length() - 1);
-            storedFile = storedFile + ",";
+            
+            if(storedFile.length() > 1){
+                storedFile = storedFile.substring(0, storedFile.length() - 1);
+                storedFile = storedFile + ",";
+            }
+            
             
             FileWriter writefile = new FileWriter(path);
             PrintWriter writer = new PrintWriter(writefile);
