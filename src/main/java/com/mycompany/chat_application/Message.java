@@ -83,9 +83,10 @@ public class Message {
         
         System.out.println("""
                            Choose what to do with the massege reply with a number (1-3)
+                            Option 0 : Disregard Message
                             Option 1 : Send Message 
                             Option 2 : Store Message  
-                            Option 3 : Disregard Message""");
+                            """);
         
         String option = scanner.nextLine();
         System.out.println();
@@ -139,10 +140,28 @@ public class Message {
             
         }
         else{
+           
+            //the file object will open the file and the buffered reader object will help read the file effectively
             FileReader readfile = new FileReader(path);
             BufferedReader reader = new BufferedReader(readfile);
             
+            String line;
+            String storedFile = "";
+            
+            while((line = reader.readLine()) != null){
+                storedFile = storedFile + line + "\n";
+            }
+            storedFile = storedFile.substring(0, storedFile.length() - 1);
+            storedFile = storedFile + ",";
+            
+            FileWriter writefile = new FileWriter(path);
+            PrintWriter writer = new PrintWriter(writefile);
+            
+            writer.println(storedFile);
+            writer.println(newInfo);
+            writer.println("]");
         }
+        System.out.println("Message stored succesfully");
     }
     
     public int totalMessages(int numberOfMessages) {
