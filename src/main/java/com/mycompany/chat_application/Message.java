@@ -26,8 +26,8 @@ public class Message {
                            ***Welcoome to QuickChat***
                            Choose an Option (1-3)
                            Option1 : Send Messages 
-                           Option2: Show recently sent messages  
-                           Option3: Quit""");
+                           Option2 : Show recently sent messages  
+                           Option3 : Quit""");
         Option = scanner.nextInt();
         scanner.nextLine();
         
@@ -57,20 +57,21 @@ public class Message {
             numberOfMessages = scanner.nextInt();
             scanner.nextLine();
             
-            int messageCounter = 1;
-            while(messageCounter <= numberOfMessages){
+            
+            for(int i =1; i<= numberOfMessages; i++){
                 
                 System.out.println();
-                System.out.println("Enter message number "+ messageCounter + " (Must be less than 250 characters)");
+                System.out.println("Enter message number "+ i + " (Must be less than 250 characters)");
                 String message = scanner.nextLine();
                 
-                String result = sentMessage(messageCounter, message, recipientCellNumber);
+                String result = sentMessage(i, message, recipientCellNumber);
                 
                 System.out.println(result);
-                messageCounter++;
             }
+
             int tota_messages = totalMessages(totalMessages);
             System.out.println("The total number of messages sent is : " + tota_messages);
+            System.out.println();
             
             
         }
@@ -82,8 +83,8 @@ public class Message {
     public String sentMessage(int numOfMessage, String message, String recipientCellNumber){
         
         System.out.println("""
-                           Choose what to do with the massege reply with a number (1-3)
-                            Option 0 : Disregard Message
+                           Choose what to do with the massege reply with a number (0-2)
+                            Option 0 : Delete Message
                             Option 1 : Send Message 
                             Option 2 : Store Message  
                             """);
@@ -91,31 +92,39 @@ public class Message {
         String option = scanner.nextLine();
         System.out.println();
         
+        long messageId = createMessageId();
+        String messageHash = createMessageHash(messageId, numOfMessage, message);
+        
         if(option.equals("1")){
-            
-            
-            long messageId = createMessageId();
-            String messageHash = createMessageHash(messageId, numOfMessage, message);
-            
+
             System.out.println("Message ID : "+ messageId + 
                     "\nMessageHash : "+ messageHash +
                     "\nRecipient : "+ recipientCellNumber + 
-                    "\nMessage : " + message);
-            
+                    "\nMessage : " + message); 
             System.out.println();
             totalMessages++;
             return "Message Sent Successfully";
             
         }
-        
+        else if(option.equals("2")){
+            try{
+                storeMessage(message, messageId, messageHash, recipientCellNumber);
+            }catch(IOException e){
+                System.out.println("Could not store message");
+            }
+            return "Message successfully stored";
+        }
+        else if(option.equals("0")){
+            return "Message deleted";
+        }
      
             
-       return null;     
+       return "Invalid option";
     }
     
     public void storeMessage(String message, long id, String hash, String recipientCell) throws IOException{
         
-        String path = "message.json";
+        String path = "messages.json";
         File file = new File(path);
         
         String newInfo = "{\n"+
@@ -138,6 +147,7 @@ public class Message {
             writer.println(newInfo);
             writer.println("]");
             
+            writer.close();
         }
         else{
            
@@ -151,6 +161,7 @@ public class Message {
             while((line = reader.readLine()) != null){
                 storedFile = storedFile + line + "\n";
             }
+            reader.close();
             storedFile = storedFile.substring(0, storedFile.length() - 1);
             storedFile = storedFile + ",";
             
@@ -160,8 +171,9 @@ public class Message {
             writer.println(storedFile);
             writer.println(newInfo);
             writer.println("]");
+            
+            writer.close();
         }
-        System.out.println("Message stored succesfully");
     }
     
     public int totalMessages(int numberOfMessages) {
@@ -179,7 +191,7 @@ public class Message {
        int lastSpace = message.lastIndexOf(" ");
        String lastWord = message.substring(lastSpace + 1).toUpperCase();
        
-       return firstTwoNUm + ":" + numOfMessage + firstWord + lastWord;
+       return firstTwoNUm + ":" + numOfMessage +":"+ firstWord + lastWord;
     }
      
     public long createMessageId(){
