@@ -13,7 +13,7 @@ public class Registration {
          
     //this void register method handles the registration process also the login proccess 
     //also this is where we also get the user input and print out relevent info
-    void register(){
+    public boolean register(){
         Scanner scanner = new Scanner(System.in);
         
         System.out.println("Enter username (MUST CONTAIN an underscore and be 5 characters or less");
@@ -29,7 +29,7 @@ public class Registration {
         
         if(!checkCellphoneNumber(storedCellphoneNum)){
             System.out.println("REGISTRATION FAILED");
-            return;
+            return false;
         }
         
         String registerStatus = registerUser(rightUsername, rightPassword);
@@ -56,8 +56,12 @@ public class Registration {
             System.out.print("Enter your password: ");
             String password = scanner.nextLine();
             
-            System.out.println(returnLoginStatus(firstName, lastName , username, storedUsername, password, storedPassword));
+            return returnLoginStatus(firstName, lastName , username, storedUsername, password, storedPassword);
         }
+        else{
+            return false;
+        }
+        
     }
     //this method returns the correct output based on if the user was able to register or not
     //also lets the user know why they fail to register
@@ -87,13 +91,16 @@ public class Registration {
     
     // returns the logi status of the user letting them know if the were successful or not
     //it takes in alot of aarguments because some are for the loginUser that is called inside it 
-    public String returnLoginStatus(String firstName, String lastName, String username, String storedUsername, String password, String storedPassword){
+    public boolean returnLoginStatus(String firstName, String lastName, String username, String storedUsername, String password, String storedPassword){
         
         if(loginUser(username, storedUsername, password, storedPassword)){
-        return "LOGIN SUCCESSFULL Welcome " + firstName +","+ lastName+ " it is great to see you again.";
+            
+            System.out.println("LOGIN SUCCESSFULL Welcome " + firstName +","+ lastName+ " it is great to see you again.");
+            return true;
         }
         else{
-             return "Password or username incorrect please try again.";
+            System.out.println("LOGIN FAILED Password or username incorrect please try again.");
+             return false;
         }
         
     }
