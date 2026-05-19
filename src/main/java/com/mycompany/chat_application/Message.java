@@ -22,6 +22,7 @@ public class Message {
         int Option;
         
     do{
+        System.out.println();
         System.out.println("""
                            ***Welcoome to QuickChat***
                            Choose an Option (1-3)
@@ -128,10 +129,10 @@ public class Message {
         File file = new File(path);
         
         String newInfo = "{\n"+
-                            "\"Message\"  : \"" +message+"\",\n" + 
+                            "\"message\"  : \"" +message+"\",\n" + 
                             "\"recipient\": \"" +recipientCell +"\",\n" +
                             "\"messageID\": \""+id+"\",\n" +
-                            "\"messaheHash\": \"" +hash+"\"\n" +
+                            "\"messageHash\": \"" +hash+"\"\n" +
                             "}";
         
         //using the file object to check if the file exist
@@ -163,6 +164,7 @@ public class Message {
             }
             reader.close();
             
+            storedFile = storedFile.trim();
             if(storedFile.length() > 1){
                 storedFile = storedFile.substring(0, storedFile.length() - 1);
                 storedFile = storedFile + ",";

@@ -15,8 +15,11 @@ public class Chat_Application {
         Registration reg = new Registration();
         Message message = new Message();
 
-        message.Messaging();
-        //reg.register();
+        
+        //if statement so the user can only message if he was able to login succesfully
+        if (reg.register()){
+            message.Messaging();
+        }
     }
 }
 
